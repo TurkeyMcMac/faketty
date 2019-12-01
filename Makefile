@@ -9,7 +9,8 @@ version = 0.0.1
 all: $(exe) $(man)
 
 $(exe): $(exe-src)
-	gcc	-std=c89 -Wall -Wextra \
+	gcc	-std=gnu99 -Wall -Wextra \
+		-pedantic \
 		-shared -fPIC -pie \
 		-O3 \
 		-DVERSION='"$(version)"' \
