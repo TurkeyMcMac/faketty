@@ -139,7 +139,8 @@ int isatty(int fd)
 	 && isatty_fake[fd]) {
 		if (isatty_is[fd]) return 1;
 	} else {
-		int (*orig_isatty)(int fd) = dlsym(RTLD_NEXT, "isatty");
+		int (*orig_isatty)(int fd);
+		*(void **)&orig_isatty = dlsym(RTLD_NEXT, "isatty");
 		if (orig_isatty) return orig_isatty(fd);
 	}
 	errno = EINVAL;

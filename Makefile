@@ -2,7 +2,7 @@ exe = faketty
 exe-src = faketty.c
 man = faketty.1.gz
 man-src = faketty.1.in
-version = 0.0.1
+version = 0.0.2
 
 .PHONY: all clean
 
