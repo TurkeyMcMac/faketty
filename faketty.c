@@ -39,7 +39,7 @@ static void print_help(const char *progname, FILE *to)
 
 static void print_version(const char *progname, FILE *to)
 {
-	fprintf(to, "%s version 0.0.1\n", progname);
+	fprintf(to, "%s version "VERSION"\n", progname);
 }
 
 int main(int argc, char *argv[])

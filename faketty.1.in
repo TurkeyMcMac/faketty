@@ -1,0 +1,77 @@
+.TH faketty 1 "1 Dec. 2019" "version @@VERSION@@"
+
+
+.SH NAME
+
+\fBfaketty\fR - Simulate standard streams being terminals or not
+
+
+.SH SYNOPSIS
+
+\fBfaketty\fR [\fB-iIoOeEhv\fR] [--] \fICOMMAND ARGS\fR...
+
+
+.SH DESCRIPTION
+
+\fBfaketty\fR runs the given \fICOMMAND\fR with the given \fIARGS\fR. When the
+command calls \fBisatty\fR(3), the function is intercepted using LD_PRELOAD. The
+function may return true or false independent of whether stdin/stdout/stderr is
+actually a terminal.
+
+
+.SH OPTIONS
+
+.IP \fB-i\fR
+Pretend standard input is a terminal.
+
+.IP \fB-I\fR
+Pretend standard input is not a terminal.
+
+.IP \fB-o\fR
+Pretend standard output is a terminal.
+
+.IP \fB-O\fR
+Pretend standard output is not a terminal.
+
+.IP \fB-e\fR
+Pretend standard error is a terminal.
+
+.IP \fB-E\fR
+Pretend standard error is not a terminal.
+
+.IP \fB-h\fR
+Print help information and exit.
+
+.IP \fB-v\fR
+Print version information and exit.
+
+
+.SH EXIT STATUS
+
+\fBfaketty\fR exits with 0 on success. When it fails, it returns 1. If the
+command is run, then the exit status is the exit status of the command.
+
+
+.SH ENVIRONMENT
+
+.IP LD_PRELOAD
+This variable is overriden to intercept calls to \fBisatty\fR(3).
+
+
+.SH BUGS
+
+The entire implementation is pretty hacky and might not work in some places
+where it seems like it should. Only \fBisatty\fR(3) is intercepted, not other
+methods of determining the same thing. Many programs use the call to determine
+whether to use color and so on, but most have ways of forcing such things on or
+off. When possible, use those built-in mechanisms.
+
+
+.SH SEE ALSO
+
+\fBisatty\fR(3)
+
+
+.SH AUTHOR
+
+Written by Jude Melton-Houghton (jwmhjwmh@gmail.com).
